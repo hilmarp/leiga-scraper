@@ -1,6 +1,5 @@
 // Allt sem þarf til þess að appið virki
 var express = require('express'),
-	fs      = require('fs'),
 	request	= require('request'),
 	cheerio = require('cheerio'),
 	app     = express();
@@ -18,42 +17,38 @@ app.get('/leiga', function(req, res) {
 			// Notum Cheerio á HTML sem kemur til baka
 			var $ = cheerio.load(html);
 
+			// Array til að geyma upplýsingar
+			var houses = {};
+
+			// Hvað eru margar fasteignir?
+			// var house_count = $('.rental-itemlist-property').length;
+
 			// Upplýsingar sem við erum að ná í
-			var address, price;
-			var json = { address : "", price : "" };
+			var address, price, house_info;
 
-			// Ná í address
-			$('.rental-itemlist-property .rental-itemlist-headline').filter(function() {
+			// Skrifa upplýsingar um öll húsnæði í array
+			$('.rental-itemlist-property').each(function(index) {
 
-				// Vista address
-				address = $(this).text();
+				// Ná í address
+				address = $(this).find('.rental-itemlist-headline').text();
 
-				// Bæta því í json object
-				json.address = address;
+				// Ná í price
+				price = $(this).find('.rental-itemlist-price').text();
 
-			});
+				// Ná í info um húsnæði
+				house_info = $(this).find('.rental-itemlist-maininfo').text();
 
-			// Ná í price
-			$('.rental-itemlist-property .rental-itemlist-price').filter(function() {
-
-				// Vista price
-				price = $(this).text();
-
-				// Bæta því í json object
-				json.price = price;
+				// Setja í array object
+				houses[index] = {address: address, price: price, info: house_info};
 
 			});
+
+			// Breyta array object í json
+			var json = JSON.stringify(houses);
 
 		}
 
-		// Búa til json skrá með upplýsingunum af síðunni
-		fs.writeFile('leiga.json', JSON.stringify(json, null, 4), function(err) {
-
-			console.log('Skrá hefur verið búin til!');
-
-		});
-
-		res.send('Gáðu í console');
+		res.send(json);
 
 	});
 
@@ -61,6 +56,6 @@ app.get('/leiga', function(req, res) {
 
 app.listen('8080');
 
-console.log('Server kominn i gang a porti 8080!');
+console.log('\nServer kominn i gang a porti 8080!');
 
 exports = module.exports = app;
