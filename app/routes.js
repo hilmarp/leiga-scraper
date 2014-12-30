@@ -7,7 +7,7 @@ var request = require('request'),
 module.exports = function(app) {
 
 	// Server routes
-	app.get('/api/leiga', function(req, res) {
+	app.get('/api/mbl-leiga', function(req, res) {
 
 		// Náum í fasteignir frá þessu URLi
 		url = 'http://www.mbl.is/leiga/';
@@ -58,7 +58,7 @@ module.exports = function(app) {
 
 	});
 
-	// Frontend routes
+	// Frontend routes, Angular höndlar þær
 	app.get('*', function(req, res) {
 
 		res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
