@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Scraper fyrir leigusidur",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "leiga-scraper"
+    "url": "https://github.com/hilmarp/leiga-scraper.git"
   },
   "author": "hilmarp",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies" : {
+    "express" : "latest",
+    "request" : "latest",
+    "cheerio" : "latest"
+  }
 }
