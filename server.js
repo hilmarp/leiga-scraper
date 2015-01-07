@@ -43,7 +43,7 @@ app.get('/api/mbl', function(req, res) {
 			// Hvað ætlum við að geyma
 			var address, price, house_info, house_text;
 
-			$('.rental-itemlist-property').each(function(index) {
+			$('.rental-itemlist-property').each(function() {
 				// Ná í address
 				address = $(this).find('.rental-itemlist-headline').text().trim();
 
@@ -56,12 +56,20 @@ app.get('/api/mbl', function(req, res) {
 				// Ńá í lýsingu um hús
 				house_text = $(this).find('.rental-itemlist-maintext').text().trim();
 
+				// Ná í myndir við hverja fasteign
+				var images = [];
+				$(this).find('.rental-itemlist-image').each(function() {
+					var single_image = $(this).find('img').attr('src');
+					images.push(single_image);
+				});
+
 				// Bæta í arrayið
 				houses.results.push({
 					address: address,
 					price: price,
 					house_info: house_info,
-					house_text: house_text
+					house_text: house_text,
+					images: images
 				});
 			});
 
