@@ -1,1 +1,0 @@
-angular.module('houseApp', ['ngRoute', 'appRoutes', 'MainController', 'HouseService']);

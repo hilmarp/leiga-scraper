@@ -1,17 +1,25 @@
 {
   "name": "leiga-scraper",
   "version": "1.0.0",
-  "description": "Scraper fyrir leigusidur",
+  "description": "Web scraper fyrir leigusidur",
   "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/hilmarp/leiga-scraper.git"
   },
-  "author": "hilmarp",
+  "author": "Hilmar",
   "license": "ISC",
-  "dependencies" : {
-    "express" : "latest",
-    "request" : "latest",
-    "cheerio" : "latest"
+  "bugs": {
+    "url": "https://github.com/hilmarp/leiga-scraper/issues"
+  },
+  "homepage": "https://github.com/hilmarp/leiga-scraper",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest"
   }
 }
